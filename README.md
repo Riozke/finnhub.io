@@ -1,51 +1,51 @@
-# React + TypeScript + Vite
+# Finance Project
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web application that displays real-time financial information. It is built with React using Vite as the bundler and Tailwind CSS for styling. The application connects to the Finnhub API to fetch financial data, such as stock quotes, news, and more.
 
-Currently, two official plugins are available:
+## Instructions
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### Prerequisites
 
-## Expanding the ESLint configuration
+Before getting started, make sure you have `Node.js` and `npm` installed.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+### 1. Clone the Repository
 
-- Configure the top-level `parserOptions` property like this:
+Clone this repository to your local machine using Git:
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+```bash
+git clone <repository-url>
+cd <repository-name>
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+## 2. Set Up the Environment Variables File
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+Inside the repository, you will find a file named `.env.example`. Rename it to `.env` and add your Finnhub API key there. To get your API key, go to the Finnhub Dashboard and sign up to obtain it.
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+## 3. Install Dependencies
+
+Install the project dependencies using one of the following commands:
+
+```bash
+npm ci
 ```
-"# finnhub.io" 
+
+## 4. Run the Application
+
+Once the dependencies are installed, run the following command to start the application:
+
+```bash
+npm run dev
+```
+
+## 5. Technologies Used
+
+- **React**: JavaScript library for building user interfaces.
+- **Vite**: Fast bundler and development server.
+- **Tailwind CSS**: CSS framework for rapid and customizable design.
+- **Finnhub API**: API that provides real-time financial data.
+
+## 6. Instructions for Using the File:
+
+1. Copy the content above.
+2. Paste it into a file named `README.md` in the root of your project.
+3. Replace `<repository-url>` and `<repository-name>` with the correct information for your project.
