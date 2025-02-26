@@ -18,7 +18,7 @@ interface StockGraphProps {
 export const StockGraph: React.FC<StockGraphProps> = ({ stockData }) => {
   return (
     <div className="bg-white p-4 rounded-lg shadow-md">
-      <h2 className="text-lg font-semibold mb-2">Evolución de Precios</h2>
+      <h2 className="text-lg font-semibold mb-2">Price Evolution</h2>
 
       <ResponsiveContainer width="100%" height={300}>
         <LineChart>
@@ -45,7 +45,6 @@ export const StockGraph: React.FC<StockGraphProps> = ({ stockData }) => {
   );
 };
 
-// Función para asignar colores diferentes a cada acción
 const getStockColor = (symbol: string) => {
   const colors: Record<string, string> = {
     AAPL: "#1f77b4",

@@ -21,13 +21,13 @@ export const StockCard: React.FC<StockCardProps> = ({
     <div className={`p-4 border-l-4 rounded-lg shadow-sm ${bgColor}`}>
       <h3 className="text-lg font-bold">{symbol}</h3>
       <p className="text-gray-600">
-        Precio: <span className="font-semibold">{price.toFixed(2)} USD</span>
+        Price: <span className="font-semibold">{price.toFixed(2)} USD</span>
       </p>
       <p className={`${textColor} font-semibold`}>
-        Cambio: {changePercent.toFixed(2)}%
+        Change: {changePercent.toFixed(2)}%
       </p>
       <p className="text-sm text-gray-500">
-        Alerta en: <span className="font-medium">{alertPrice} USD</span>
+        Alert at: <span className="font-medium">{alertPrice} USD</span>
       </p>
     </div>
   );

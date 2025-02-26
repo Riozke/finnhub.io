@@ -20,12 +20,12 @@ export const StockForm: React.FC<StockFormProps> = ({ onAddStock }) => {
     const price = parseFloat(alertPrice);
 
     if (isNaN(price) || price <= 0) {
-      alert("Por favor, ingresa un precio válido");
+      alert("Please enter a valid price");
       return;
     }
 
     onAddStock(selectedStock, price);
-    setAlertPrice(""); // Resetear input
+    setAlertPrice("");
   };
 
   return (
@@ -33,11 +33,10 @@ export const StockForm: React.FC<StockFormProps> = ({ onAddStock }) => {
       onSubmit={handleSubmit}
       className="bg-white shadow-md rounded-lg p-4 space-y-4"
     >
-      <h2 className="text-lg font-semibold">Añadir Acción</h2>
+      <h2 className="text-lg font-semibold">Add Stock</h2>
 
-      {/* Dropdown de selección */}
       <label className="block">
-        <span className="text-gray-700">Selecciona una acción:</span>
+        <span className="text-gray-700">Select a stock:</span>
         <select
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
           value={selectedStock}
@@ -51,25 +50,23 @@ export const StockForm: React.FC<StockFormProps> = ({ onAddStock }) => {
         </select>
       </label>
 
-      {/* Input de precio de alerta */}
       <label className="block">
-        <span className="text-gray-700">Precio de alerta ($):</span>
+        <span className="text-gray-700">Alert price ($):</span>
         <input
           type="number"
           step="0.01"
           className="mt-1 block w-full p-2 border border-gray-300 rounded-md"
-          placeholder="Ejemplo: 150.00"
+          placeholder="Example: 150.00"
           value={alertPrice}
           onChange={(e) => setAlertPrice(e.target.value)}
         />
       </label>
 
-      {/* Botón de agregar */}
       <button
         type="submit"
         className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
       >
-        Añadir Acción
+        Add Stock
       </button>
     </form>
   );

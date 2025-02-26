@@ -31,7 +31,7 @@ export const Home: React.FC = () => {
         </>
       ) : (
         <p className="text-center text-gray-500">
-          Añade una acción para comenzar 🚀
+          Add a stock to get started 🚀
         </p>
       )}
     </div>
