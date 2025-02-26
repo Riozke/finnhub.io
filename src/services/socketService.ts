@@ -1,6 +1,12 @@
 import io from "socket.io-client";
 
-const socket = io("wss://ws.finnhub.io?token=cuv9en1r01qpi6ru45m0cuv9en1r01qpi6ru45mg");
+const token = import.meta.env.VITE_FINNHUB_API_KEY;
+
+if (!token) {
+  console.error("Finhub API key is missing");
+}
+
+const socket = io(`wss://ws.finnhub.io?token=${token}`);
 
 export const subscribeToStock = (symbol: string) => {
   socket.emit("subscribe", symbol);

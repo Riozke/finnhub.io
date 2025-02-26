@@ -6,6 +6,7 @@ interface StockData {
   changePercent: number;
   alertPrice: number;
   priceHistory: { time: string; price: number }[];
+  notified: boolean;
 }
 
 export const saveStocksToStorage = (stocks: StockData[]) => {

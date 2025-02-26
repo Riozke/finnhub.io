@@ -8,6 +8,7 @@ interface StockData {
   changePercent: number;
   alertPrice: number;
   priceHistory: { time: string; price: number }[];
+  notified: boolean;
 }
 
 export const useStockData = () => {
@@ -17,28 +18,37 @@ export const useStockData = () => {
   const updateStockPrice = useCallback((symbol: string, newPrice: number) => {
     setStocks((prevStocks) =>
       prevStocks.map((stock) => {
-        const isBelowAlert = newPrice < stock.alertPrice;
+        if (stock.symbol !== symbol) return stock;
 
-        if (isBelowAlert) {
+        const isBelowAlert = newPrice < stock.alertPrice;
+        const shouldNotify = isBelowAlert && !stock.notified;
+        const resetNotification = !isBelowAlert ? false : stock.notified;
+
+        if (shouldNotify) {
           sendStockAlertNotification(symbol, newPrice);
         }
 
-        return stock.symbol === symbol
-          ? {
-            ...stock,
-            price: newPrice,
-            priceHistory: [
-              ...stock.priceHistory,
-              { time: new Date().toLocaleTimeString(), price: newPrice },
-            ],
-          }
-          : stock;
+        return {
+          ...stock,
+          price: newPrice,
+          priceHistory: [
+            ...stock.priceHistory,
+            { time: new Date().toLocaleTimeString(), price: newPrice },
+          ],
+          notified: shouldNotify ? true : resetNotification,
+        };
       })
     );
   }, []);
 
   useEffect(() => {
-    const ws = new WebSocket(`wss://ws.finnhub.io?token=cuv9en1r01qpi6ru45m0cuv9en1r01qpi6ru45mg`);
+    const token = import.meta.env.VITE_FINNHUB_API_KEY;
+    if (!token) {
+      console.error("Finnhub API key is missing");
+      return;
+    }
+
+    const ws = new WebSocket(`wss://ws.finnhub.io?token=${token}`);
     setSocket(ws);
 
     ws.onmessage = (event) => {
@@ -55,8 +65,6 @@ export const useStockData = () => {
     saveStocksToStorage(stocks);
   }, [stocks]);
 
-
-
   const addStock = useCallback((symbol: string, alertPrice: number) => {
     if (stocks.some((s) => s.symbol === symbol)) return;
 
@@ -66,6 +74,7 @@ export const useStockData = () => {
       changePercent: 0,
       alertPrice,
       priceHistory: [],
+      notified: false
     };
 
     setStocks((prev) => [...prev, newStock]);

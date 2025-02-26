@@ -1,7 +1,11 @@
+// src/service-worker.js
+const CACHE_NAME = "stock-cache-v1";
+const ASSETS_TO_CACHE = ["/", "/index.html", "/manifest.json"];
+
 self.addEventListener("install", (event) => {
   event.waitUntil(
-    caches.open("stock-cache-v1").then((cache) => {
-      return cache.addAll(["/", "/index.html", "/manifest.json"]);
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll(ASSETS_TO_CACHE);
     })
   );
 });
@@ -15,11 +19,10 @@ self.addEventListener("fetch", (event) => {
 });
 
 self.addEventListener("push", (event) => {
-  const data = event.data ? event.data.text() : "Alerta de Stock!";
+  const data = event.data ? event.data.text() : "Stock Alert";
   event.waitUntil(
     self.registration.showNotification("Stock Alert", {
       body: data,
-      icon: "/icons/icon-192x192.png",
     })
   );
 });
